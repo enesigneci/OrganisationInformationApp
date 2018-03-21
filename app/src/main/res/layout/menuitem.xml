@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/menuitem"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="45dp"
+    android:paddingBottom="45dp"
+    android:paddingLeft="22.5dp"
+    android:paddingRight="22.5dp"
+    android:background="#87bfff">
+    <ImageView
+        android:id="@+id/menuimage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/menutext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        style="@style/Base.TextAppearance.AppCompat.Title"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textSize="14sp"/>
+</LinearLayout>
