@@ -16,7 +16,6 @@ import android.widget.RemoteViews;
 
 import com.enesigneci.dernek.MainActivity;
 import com.enesigneci.dernek.R;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
