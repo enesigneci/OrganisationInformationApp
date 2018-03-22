@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "204786835371",
+    "firebase_url": "https://dernek-haciahmetoglu.firebaseio.com",
+    "project_id": "dernek-haciahmetoglu",
+    "storage_bucket": "dernek-haciahmetoglu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204786835371:android:a4b636e6e6663f6a",
+        "android_client_info": {
+          "package_name": "com.enesigneci.dernek"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "204786835371-d1ahnsbuso3qhe639rlra9c6ovj8667o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.enesigneci.dernek",
+            "certificate_hash": "4d789c05b0e6a4bf1ac3bb6713c7e7a27da7d1bb"
+          }
+        },
+        {
+          "client_id": "204786835371-6cpfvcio7jfkmca534v4t39mhqlp4arl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6ZrZ_P3zOAwwGG5fOjab5EWz-ZHq3CFo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "204786835371-6cpfvcio7jfkmca534v4t39mhqlp4arl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
