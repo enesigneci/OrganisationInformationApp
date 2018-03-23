@@ -14,7 +14,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 public class RegistrationIntentService extends IntentService {
 
     private static final String TAG = "RegIntentService";
-    private static final String[] TOPICS = {"global"};
 
     public RegistrationIntentService() {
         super(TAG);
@@ -27,10 +26,8 @@ public class RegistrationIntentService extends IntentService {
         try {
             String token = FirebaseInstanceId.getInstance().getToken();
             Log.d("Firebase Token",token);
-//            sharedPreferences.edit().putBoolean(GCMPreferences.SENT_TOKEN_TO_SERVER, true).apply();
         } catch (Exception e) {
             Log.d(TAG, "Failed to complete token refresh", e);
-//            sharedPreferences.edit().putBoolean(GCMPreferences.SENT_TOKEN_TO_SERVER, false).apply();
         }
         Intent registrationComplete = new Intent("registrationComplete");
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);

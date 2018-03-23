@@ -29,7 +29,12 @@ public class MainActivity extends BaseActivity {
         menuGrid.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), menuGrid, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(MainActivity.this,  "Item clicked"+position, Toast.LENGTH_SHORT).show();
+                switch (position){
+                    case 5:
+                        Intent announcementsIntent=new Intent(MainActivity.this,AnnouncementsActivity.class);
+                        startActivity(announcementsIntent);
+                        break;
+                }
             }
 
             @Override

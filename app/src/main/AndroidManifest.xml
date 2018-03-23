@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".base.BaseActivity" />
+        <activity android:name=".AnnouncementsActivity" />
 
         <service
             android:name=".notifications.MyFirebaseInstanceIdService">

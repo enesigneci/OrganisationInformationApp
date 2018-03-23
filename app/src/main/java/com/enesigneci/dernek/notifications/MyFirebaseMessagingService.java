@@ -14,22 +14,29 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.enesigneci.dernek.AnnouncementsActivity;
 import com.enesigneci.dernek.MainActivity;
 import com.enesigneci.dernek.R;
+import com.enesigneci.dernek.database.AppDatabase;
+import com.enesigneci.dernek.model.Notification;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.List;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService{
     public static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-
         Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+        sendNotification(remoteMessage);
+    }
+    public void sendNotification(RemoteMessage remoteMessage){
         String smallTitle=remoteMessage.getData().get("type")+" duyurusu: "+remoteMessage.getData().get("date");
         String bigTitle=remoteMessage.getData().get("who")+ " üyemizin " +remoteMessage.getData().get("type")+" duyurusu: "+remoteMessage.getData().get("date");
         String smallDescription=remoteMessage.getData().get("type")+" duyurusu: "+remoteMessage.getData().get("date");
         String bigDescription=remoteMessage.getData().get("who")+" adlı üyemizin "+remoteMessage.getData().get("date")+" tarihinde "+remoteMessage.getData().get("address")+" isimli mekanda "+remoteMessage.getData().get("type")+" daveti vardır.";
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, AnnouncementsActivity.class);
         intent.putExtra("Message", smallTitle);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
@@ -77,9 +84,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
             notificationManager.createNotificationChannel(mChannel);
-
         }
         notificationManager.notify(notifyID, notification);
-    }
 
+        Notification notificationModelInstance=new Notification(bigTitle,bigDescription,remoteMessage.getData().get("date"),remoteMessage.getData().get("type"));
+        saveNotificationToRoomDatabase(notificationModelInstance);
+    }
+    public List<Notification> saveNotificationToRoomDatabase(Notification notification){
+        AppDatabase.getAppDatabase(getApplicationContext()).notificationDao().insertAll(notification);
+        return AppDatabase.getAppDatabase(getApplicationContext()).notificationDao().getAll();
+    }
 }
