@@ -30,6 +30,11 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onItemClick(View view, int position) {
                 switch (position){
+                    case 0:
+                        Intent aboutVillageIntent=new Intent(MainActivity.this,AboutVillageActivity.class);
+                        startActivity(aboutVillageIntent);
+                        break;
+
                     case 5:
                         Intent announcementsIntent=new Intent(MainActivity.this,AnnouncementsActivity.class);
                         startActivity(announcementsIntent);
