@@ -22,6 +22,8 @@
         <activity android:name=".base.BaseActivity" />
         <activity android:name=".AnnouncementsActivity" />
         <activity android:name=".AboutVillageActivity" />
+        <activity android:name=".MembersActivity" />
+        <activity android:name=".AdminActivity" />
 
         <service
             android:name=".notifications.MyFirebaseInstanceIdService">

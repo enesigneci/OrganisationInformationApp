@@ -32,9 +32,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         sendNotification(remoteMessage);
     }
     public void sendNotification(RemoteMessage remoteMessage){
-        String smallTitle=remoteMessage.getData().get("type")+" duyurusu: "+remoteMessage.getData().get("date");
+        String smallTitle=remoteMessage.getData().get("type")+" duyurusu: ";
         String bigTitle=remoteMessage.getData().get("who")+ " üyemizin " +remoteMessage.getData().get("type")+" duyurusu: "+remoteMessage.getData().get("date");
-        String smallDescription=remoteMessage.getData().get("type")+" duyurusu: "+remoteMessage.getData().get("date");
+        String smallDescription=remoteMessage.getData().get("who")+" üyemizin "+remoteMessage.getData().get("type")+" duyurusu";
         String bigDescription=remoteMessage.getData().get("who")+" adlı üyemizin "+remoteMessage.getData().get("date")+" tarihinde "+remoteMessage.getData().get("address")+" isimli mekanda "+remoteMessage.getData().get("type")+" daveti vardır.";
         Intent intent = new Intent(this, AnnouncementsActivity.class);
         intent.putExtra("Message", smallTitle);
@@ -87,7 +87,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         }
         notificationManager.notify(notifyID, notification);
 
-        Notification notificationModelInstance=new Notification(bigTitle,bigDescription,remoteMessage.getData().get("date"),remoteMessage.getData().get("type"));
+        Notification notificationModelInstance=new Notification(smallTitle,smallDescription,remoteMessage.getData().get("date"),remoteMessage.getData().get("type"));
         saveNotificationToRoomDatabase(notificationModelInstance);
     }
     public List<Notification> saveNotificationToRoomDatabase(Notification notification){

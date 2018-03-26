@@ -14,7 +14,7 @@ import com.enesigneci.dernek.model.Notification;
  * Created by rdcmac on 23.03.2018.
  */
 
-@Database(entities = {Notification.class}, version = 2)
+@Database(entities = {Notification.class}, version = 4)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;

@@ -8,7 +8,7 @@
 
     <ImageView
         android:src="@mipmap/ic_launcher"
-        android:id="@+id/notification_icon"
+        android:id="@+id/photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -18,29 +18,23 @@
     <TextView
 
         android:textColor="#000"
-        android:id="@+id/notification_title"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:text="amcık"
-        android:layout_toRightOf="@id/notification_icon"
+        android:layout_toRightOf="@id/photo"
         />
 
-    <TextView
-        android:id="@+id/notification_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-        android:layout_toRightOf="@id/notification_title"/>
 
     <TextView
         android:textSize="13sp"
         android:textColor="#000"
-        android:id="@+id/notification_content"
+        android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/notification_icon"
-        android:layout_below="@id/notification_title"
+        android:layout_toRightOf="@id/photo"
+        android:layout_below="@id/title"
         />
 
 </RelativeLayout>

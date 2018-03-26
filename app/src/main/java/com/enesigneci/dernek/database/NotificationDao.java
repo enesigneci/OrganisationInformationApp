@@ -22,6 +22,9 @@ public interface NotificationDao {
     @Query("SELECT * FROM notification where type LIKE  :type")
     Notification findByType(String type);
 
+    @Query("SELECT * FROM notification where type = :id")
+    Notification findById(int id);
+
     @Query("SELECT COUNT(*) from notification")
     int countNotifications();
 

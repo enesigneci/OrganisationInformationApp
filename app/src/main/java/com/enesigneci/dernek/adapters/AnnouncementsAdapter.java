@@ -39,6 +39,7 @@ public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsView
     public void onBindViewHolder(AnnouncementsViewHolder holder, int position) {
         holder.notificationTitle.setText(notificationList.get(position).getTitle());
         holder.notificationContent.setText(notificationList.get(position).getDescription());
+        holder.notificationDate.setText(notificationList.get(position).getDate());
         Glide.with(context).load(R.drawable.announcement).into(holder.notificationIcon);
     }
 
@@ -46,16 +47,25 @@ public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsView
     public int getItemCount() {
         return notificationList.size();
     }
+    public Notification getItem(int position){
+        return notificationList.get(position);
+    }
+    public void setNotificationList(List<Notification> list){
+        notificationList=list;
+        notifyDataSetChanged();
+    }
 }
 
 class AnnouncementsViewHolder extends RecyclerView.ViewHolder{
     TextView notificationTitle;
     TextView notificationContent;
+    TextView notificationDate;
     ImageView notificationIcon;
     AnnouncementsViewHolder(View itemView) {
         super(itemView);
         notificationTitle=itemView.findViewById(R.id.notification_title);
         notificationContent=itemView.findViewById(R.id.notification_content);
+        notificationDate=itemView.findViewById(R.id.notification_date);
         notificationIcon=itemView.findViewById(R.id.notification_icon);
     }
 }

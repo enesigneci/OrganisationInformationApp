@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.enesigneci.dernek.adapters.MenuAdapter;
 import com.enesigneci.dernek.base.BaseActivity;
 import com.enesigneci.dernek.listeners.RecyclerItemClickListener;
@@ -18,6 +19,7 @@ import java.util.LinkedHashMap;
 
 public class MainActivity extends BaseActivity {
 
+    int isAdminCount=0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,10 @@ public class MainActivity extends BaseActivity {
                     case 0:
                         Intent aboutVillageIntent=new Intent(MainActivity.this,AboutVillageActivity.class);
                         startActivity(aboutVillageIntent);
+                        break;
+                    case 4:
+                        Intent organisationMembers=new Intent(MainActivity.this,MembersActivity.class);
+                        startActivity(organisationMembers);
                         break;
 
                     case 5:
@@ -61,6 +67,18 @@ public class MainActivity extends BaseActivity {
         linkedHashMap.put(R.drawable.members,"Dernek Üyeleri");
         linkedHashMap.put(R.drawable.announcement,"Duyurular");
         MenuAdapter menuAdapter=new MenuAdapter(MainActivity.this,linkedHashMap);
+        View titleBar=findViewById(R.id.activity_title);
+        titleBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isAdminCount++;
+                if(isAdminCount==5){
+                    isAdminCount=0;
+                    Intent adminIntent = new Intent(MainActivity.this,AdminActivity.class);
+                    startActivity(adminIntent);
+                }
+            }
+        });
         menuGrid.setAdapter(menuAdapter);
         menuAdapter.notifyDataSetChanged();
 
