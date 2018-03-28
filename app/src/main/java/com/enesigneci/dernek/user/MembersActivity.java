@@ -1,10 +1,11 @@
-package com.enesigneci.dernek;
+package com.enesigneci.dernek.user;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.enesigneci.dernek.R;
 import com.enesigneci.dernek.adapters.MembersAdapter;
 import com.enesigneci.dernek.base.BaseActivity;
 import com.enesigneci.dernek.model.User;

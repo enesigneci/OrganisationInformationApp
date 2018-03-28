@@ -1,13 +1,13 @@
-package com.enesigneci.dernek;
+package com.enesigneci.dernek.user;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import com.enesigneci.dernek.AdminActivity;
+import com.enesigneci.dernek.R;
 import com.enesigneci.dernek.adapters.MenuAdapter;
 import com.enesigneci.dernek.base.BaseActivity;
 import com.enesigneci.dernek.listeners.RecyclerItemClickListener;
@@ -33,16 +33,28 @@ public class MainActivity extends BaseActivity {
             public void onItemClick(View view, int position) {
                 switch (position){
                     case 0:
-                        Intent aboutVillageIntent=new Intent(MainActivity.this,AboutVillageActivity.class);
+                        Intent aboutVillageIntent=new Intent(getActivity(),AboutVillageActivity.class);
                         startActivity(aboutVillageIntent);
                         break;
+                    case 1:
+                        Intent photoGalleryIntent=new Intent(getActivity(),PhotoGalleryActivity.class);
+                        startActivity(photoGalleryIntent);
+                        break;
+                    case 2:
+                        Intent eventCalendarIntent=new Intent(getActivity(),EventCalendarActivity.class);
+                        startActivity(eventCalendarIntent);
+                        break;
+                    case 3:
+                        Intent managersIntent=new Intent(getActivity(),ManagersActivity.class);
+                        startActivity(managersIntent);
+                        break;
                     case 4:
-                        Intent organisationMembers=new Intent(MainActivity.this,MembersActivity.class);
+                        Intent organisationMembers=new Intent(getActivity(),MembersActivity.class);
                         startActivity(organisationMembers);
                         break;
 
                     case 5:
-                        Intent announcementsIntent=new Intent(MainActivity.this,AnnouncementsActivity.class);
+                        Intent announcementsIntent=new Intent(getActivity(),AnnouncementsActivity.class);
                         startActivity(announcementsIntent);
                         break;
                 }

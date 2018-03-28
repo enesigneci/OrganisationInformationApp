@@ -1,8 +1,7 @@
-package com.enesigneci.dernek;
+package com.enesigneci.dernek.user;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,11 +9,11 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.enesigneci.dernek.R;
 import com.enesigneci.dernek.adapters.AnnouncementsAdapter;
 import com.enesigneci.dernek.base.BaseActivity;
 import com.enesigneci.dernek.database.AppDatabase;
 import com.enesigneci.dernek.listeners.RecyclerItemClickListener;
-import com.enesigneci.dernek.model.Notification;
 
 /**
  * Created by rdcmac on 23.03.2018.

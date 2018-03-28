@@ -1,9 +1,10 @@
-package com.enesigneci.dernek;
+package com.enesigneci.dernek.user;
 
 import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.enesigneci.dernek.R;
 import com.enesigneci.dernek.base.BaseActivity;
 
 /**

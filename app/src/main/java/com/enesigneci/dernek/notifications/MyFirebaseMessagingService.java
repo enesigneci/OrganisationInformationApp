@@ -14,8 +14,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import com.enesigneci.dernek.AnnouncementsActivity;
-import com.enesigneci.dernek.MainActivity;
+import com.enesigneci.dernek.user.AnnouncementsActivity;
 import com.enesigneci.dernek.R;
 import com.enesigneci.dernek.database.AppDatabase;
 import com.enesigneci.dernek.model.Notification;

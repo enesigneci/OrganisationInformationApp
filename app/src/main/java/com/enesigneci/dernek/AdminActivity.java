@@ -1,13 +1,19 @@
 package com.enesigneci.dernek;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.enesigneci.dernek.adapters.MenuAdapter;
+import com.enesigneci.dernek.admin.PhotoGalleryAdminActivity;
 import com.enesigneci.dernek.base.BaseActivity;
 import com.enesigneci.dernek.listeners.RecyclerItemClickListener;
+import com.enesigneci.dernek.user.EventCalendarActivity;
+import com.enesigneci.dernek.user.ManagersActivity;
+import com.enesigneci.dernek.user.MembersActivity;
+import com.enesigneci.dernek.user.PhotoGalleryActivity;
 import com.enesigneci.dernek.util.GridSpacingItemDecoration;
 
 import java.util.LinkedHashMap;
@@ -26,7 +32,24 @@ public class AdminActivity extends BaseActivity {
         menuGrid.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), menuGrid, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                switch (position){
+                    case 0:
+                        Intent photoGalleryAdminIntent=new Intent(getActivity(),PhotoGalleryAdminActivity.class);
+                        startActivity(photoGalleryAdminIntent);
+                        break;
+                    case 1:
+                        Intent eventCalendarIntent=new Intent(getActivity(),EventCalendarActivity.class);
+                        startActivity(eventCalendarIntent);
+                        break;
+                    case 2:
+                        Intent managersIntent=new Intent(getActivity(),ManagersActivity.class);
+                        startActivity(managersIntent);
+                        break;
+                    case 3:
+                        Intent organisationMembers=new Intent(getActivity(),MembersActivity.class);
+                        startActivity(organisationMembers);
+                        break;
+                }
             }
 
             @Override

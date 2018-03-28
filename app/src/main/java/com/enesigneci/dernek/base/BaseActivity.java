@@ -1,5 +1,6 @@
 package com.enesigneci.dernek.base;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -20,5 +21,8 @@ public class BaseActivity extends AppCompatActivity {
     public void setTitle(String title){
         TextView activityTitle=findViewById(R.id.activity_title);
         activityTitle.setText(title);
+    }
+    public Activity getActivity(){
+        return BaseActivity.this;
     }
 }
