@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.enesigneci.dernek.R;
 import com.enesigneci.dernek.model.Photo;
-import com.enesigneci.dernek.model.User;
 import com.enesigneci.dernek.util.SquareImageView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,27 +21,28 @@ import com.google.firebase.storage.StorageReference;
 import java.util.List;
 
 /**
- * Created by rdcmac on 27.03.2018.
+ * Created by rdcmac on 29.03.2018.
  */
 
-public class PhotoGalleryAdapter extends RecyclerView.Adapter<PhotoGalleryViewHolder> {
+public class PhotoGalleryAdminAdapter extends RecyclerView.Adapter<PhotoGalleryAdminViewHolder> {
     List<Photo> photoList;
     Context context;
 
-    public PhotoGalleryAdapter(Context context,List<Photo> photoList) {
+
+    public PhotoGalleryAdminAdapter(Context context,List<Photo> photoList) {
         this.photoList = photoList;
         this.context=context;
     }
 
     @Override
-    public PhotoGalleryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PhotoGalleryAdminViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.photo_gallery_item, parent, false);
-        return new PhotoGalleryViewHolder(view);
+        return new PhotoGalleryAdminViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final PhotoGalleryViewHolder holder, int position) {
+    public void onBindViewHolder(final PhotoGalleryAdminViewHolder holder, int position) {
         FirebaseStorage storage=FirebaseStorage.getInstance();
         StorageReference storageRef=storage.getReference().child("dernek").child("dernek");
         storageRef.child(photoList.get(position).getImageUrl()).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -68,9 +68,9 @@ public class PhotoGalleryAdapter extends RecyclerView.Adapter<PhotoGalleryViewHo
     }
 }
 
-class PhotoGalleryViewHolder extends RecyclerView.ViewHolder{
+class PhotoGalleryAdminViewHolder extends RecyclerView.ViewHolder{
     SquareImageView photo;
-    PhotoGalleryViewHolder(View itemView) {
+    PhotoGalleryAdminViewHolder(View itemView) {
         super(itemView);
         photo=itemView.findViewById(R.id.photo);
     }

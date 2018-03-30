@@ -4,10 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/titlebar" />
-    <Button
-        android:id="@+id/button_file_choose"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Fotoğraf Seç" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/titlebar" />
+        <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/button_file_choose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fotoğraf Seç" />
+        </FrameLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_photo_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 </LinearLayout>
