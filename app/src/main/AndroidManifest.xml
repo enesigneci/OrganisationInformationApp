@@ -12,13 +12,8 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_notification" />
-        <activity android:name=".user.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".user.MainActivity" />
         <activity android:name=".base.BaseActivity" />
         <activity android:name=".user.AnnouncementsActivity" />
         <activity android:name=".user.AboutVillageActivity" />
@@ -29,20 +24,30 @@
         <activity android:name=".user.ManagersActivity" />
         <activity android:name=".admin.PhotoGalleryAdminActivity" />
 
+        <service android:name=".notifications.MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".notifications.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <service
-            android:name=".notifications.MyFirebaseInstanceIdService">
+            android:name=".notifications.RegistrationIntentService"
+            android:exported="false"></service>
+
+        <activity
+            android:name=".SplashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/FullscreenTheme">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </service>        <service
-            android:name=".notifications.MyFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
-        <service android:name=".notifications.RegistrationIntentService"
-            android:exported="false">
-        </service>
+        </activity>
     </application>
 
 </manifest>
