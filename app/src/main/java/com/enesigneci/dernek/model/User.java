@@ -12,17 +12,21 @@ public class User {
     String PhoneNumber;
     String Address;
     String Photo;
+    String UserCardId;
+    String TCId;
 
     public User() {
     }
 
-    public User(String name, String surname, int bloodType, String phoneNumber, String address, String photo) {
+    public User(String name, String surname, int bloodType, String phoneNumber, String address, String photo,String tcId,String userCardId) {
         Name = name;
         Surname = surname;
         BloodType = bloodType;
         PhoneNumber = phoneNumber;
         Address = address;
         Photo = photo;
+        TCId=tcId;
+        UserCardId=userCardId;
     }
 
     public String getId() {
@@ -79,5 +83,21 @@ public class User {
 
     public void setPhoto(String photo) {
         Photo = photo;
+    }
+
+    public String getTCId() {
+        return TCId;
+    }
+
+    public void setTCId(String TCId) {
+        this.TCId = TCId;
+    }
+
+    public String getUserCardId() {
+        return UserCardId;
+    }
+
+    public void setUserCardId(String userCardId) {
+        UserCardId = userCardId;
     }
 }

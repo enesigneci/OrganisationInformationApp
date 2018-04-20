@@ -2,6 +2,7 @@ package com.enesigneci.dernek.user;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -28,33 +29,36 @@ public class MainActivity extends BaseActivity {
         Intent regService = new Intent(this, RegistrationIntentService.class);
         startService(regService);
         RecyclerView menuGrid=findViewById(R.id.menugrid);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,R.layout.menuitem);
+        gridLayoutManager.setSpanCount(2);
+        menuGrid.setLayoutManager(gridLayoutManager);
         menuGrid.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), menuGrid, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 switch (position){
                     case 0:
-                        Intent aboutVillageIntent=new Intent(getActivity(),AboutVillageActivity.class);
+                        Intent aboutVillageIntent=new Intent(MainActivity.this,AboutVillageActivity.class);
                         startActivity(aboutVillageIntent);
                         break;
                     case 1:
-                        Intent photoGalleryIntent=new Intent(getActivity(),PhotoGalleryActivity.class);
+                        Intent photoGalleryIntent=new Intent(MainActivity.this,PhotoGalleryActivity.class);
                         startActivity(photoGalleryIntent);
                         break;
                     case 2:
-                        Intent eventCalendarIntent=new Intent(getActivity(),EventCalendarActivity.class);
+                        Intent eventCalendarIntent=new Intent(MainActivity.this,EventCalendarActivity.class);
                         startActivity(eventCalendarIntent);
                         break;
                     case 3:
-                        Intent managersIntent=new Intent(getActivity(),ManagersActivity.class);
+                        Intent managersIntent=new Intent(MainActivity.this,ManagersActivity.class);
                         startActivity(managersIntent);
                         break;
                     case 4:
-                        Intent organisationMembers=new Intent(getActivity(),MembersActivity.class);
+                        Intent organisationMembers=new Intent(MainActivity.this,MembersActivity.class);
                         startActivity(organisationMembers);
                         break;
 
                     case 5:
-                        Intent announcementsIntent=new Intent(getActivity(),AnnouncementsActivity.class);
+                        Intent announcementsIntent=new Intent(MainActivity.this,AnnouncementsActivity.class);
                         startActivity(announcementsIntent);
                         break;
                 }
@@ -65,12 +69,8 @@ public class MainActivity extends BaseActivity {
 
             }
         }));
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,R.layout.menuitem);
-        gridLayoutManager.setSpanCount(2);
-        menuGrid.setLayoutManager(gridLayoutManager);
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.grid_layout_margin);
         menuGrid.addItemDecoration(new GridSpacingItemDecoration(2, spacingInPixels, true, 0));
-        //new String[][]{{"Köy Hakkında","R.drawable.about_village"},{"Fotoğraf Galerisi","R.drawable.photo_gallery"},{"Etkinlik Takvimi","R.drawable.announcement"},{"Dernek Yönetimi","R.drawable.managers"}, {"Dernek Üyeleri","R.drawable.members"}, {"Duyurular","R.drawable.announcements"}}
         LinkedHashMap<Integer,String> linkedHashMap=new LinkedHashMap<>();
         linkedHashMap.put(R.drawable.about_village,"Köy Hakkında");
         linkedHashMap.put(R.drawable.photo_gallery,"Fotoğraf Galerisi");

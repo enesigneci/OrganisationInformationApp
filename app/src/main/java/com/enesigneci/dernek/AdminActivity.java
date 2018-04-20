@@ -7,13 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.enesigneci.dernek.adapters.MenuAdapter;
+import com.enesigneci.dernek.admin.AddEventToCalendarActivity;
+import com.enesigneci.dernek.admin.MembersAdminActivity;
 import com.enesigneci.dernek.admin.PhotoGalleryAdminActivity;
 import com.enesigneci.dernek.base.BaseActivity;
 import com.enesigneci.dernek.listeners.RecyclerItemClickListener;
-import com.enesigneci.dernek.user.EventCalendarActivity;
 import com.enesigneci.dernek.user.ManagersActivity;
-import com.enesigneci.dernek.user.MembersActivity;
-import com.enesigneci.dernek.user.PhotoGalleryActivity;
 import com.enesigneci.dernek.util.GridSpacingItemDecoration;
 
 import java.util.LinkedHashMap;
@@ -38,7 +37,7 @@ public class AdminActivity extends BaseActivity {
                         startActivity(photoGalleryAdminIntent);
                         break;
                     case 1:
-                        Intent eventCalendarIntent=new Intent(getActivity(),EventCalendarActivity.class);
+                        Intent eventCalendarIntent=new Intent(getActivity(),AddEventToCalendarActivity.class);
                         startActivity(eventCalendarIntent);
                         break;
                     case 2:
@@ -46,7 +45,7 @@ public class AdminActivity extends BaseActivity {
                         startActivity(managersIntent);
                         break;
                     case 3:
-                        Intent organisationMembers=new Intent(getActivity(),MembersActivity.class);
+                        Intent organisationMembers=new Intent(getActivity(), MembersAdminActivity.class);
                         startActivity(organisationMembers);
                         break;
                 }

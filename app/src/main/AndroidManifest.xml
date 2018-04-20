@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.enesigneci.dernek">
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -12,6 +16,15 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_notification" />
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.enesigneci.dernek"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
 
         <activity android:name=".user.MainActivity" />
         <activity android:name=".base.BaseActivity" />
@@ -48,6 +61,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".admin.MembersAdminActivity" />
+        <activity android:name=".admin.AddMemberActivity" />
+        <activity android:name=".admin.AddEventToCalendarActivity" />
     </application>
 
 </manifest>

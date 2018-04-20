@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,39 +12,36 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.enesigneci.dernek.R;
-import com.enesigneci.dernek.model.Notification;
 import com.enesigneci.dernek.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
- * Created by rdcmac on 23.03.2018.
+ * Created by rdcmac on 4.04.2018.
  */
 
-public class MembersAdapter extends RecyclerView.Adapter<MembersViewHolder> {
+public class MembersAdminAdapter extends RecyclerView.Adapter<MembersAdminViewHolder> {
     List<User> userList;
     Context context;
 
-    public MembersAdapter(Context context,List<User> userList) {
+    public MembersAdminAdapter(Context context,List<User> userList) {
         this.userList = userList;
         this.context=context;
     }
 
     @Override
-    public MembersViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MembersAdminViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.generic_list_item, parent, false);
-        return new MembersViewHolder(view);
+        return new MembersAdminViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final MembersViewHolder holder, int position) {
+    public void onBindViewHolder(final MembersAdminViewHolder holder, int position) {
         holder.userTitle.setText(userList.get(position).getName() + " " + userList.get(position).getSurname());
         holder.userContent.setText(userList.get(position).getPhoneNumber());
         FirebaseStorage storage=FirebaseStorage.getInstance();
@@ -55,13 +51,6 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersViewHolder> {
             public void onComplete(@NonNull Task<Uri> task) {
                 if (task.isSuccessful()){
                     Glide.with(context).load(task.getResult()).into(holder.userPhoto);
-                }else{
-                    task.addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.d("Error",e.getMessage());
-                        }
-                    });
                 }
             }
         });
@@ -80,11 +69,11 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersViewHolder> {
     }
 }
 
-class MembersViewHolder extends RecyclerView.ViewHolder{
+class MembersAdminViewHolder extends RecyclerView.ViewHolder{
     TextView userTitle;
     TextView userContent;
     ImageView userPhoto;
-    MembersViewHolder(View itemView) {
+    MembersAdminViewHolder(View itemView) {
         super(itemView);
         userTitle=itemView.findViewById(R.id.title);
         userContent=itemView.findViewById(R.id.content);

@@ -1,21 +1,24 @@
-package com.enesigneci.dernek.user;
+package com.enesigneci.dernek.admin;
 
+import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
+import android.text.InputType;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CalendarView;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.enesigneci.dernek.R;
-import com.enesigneci.dernek.admin.AddEventToCalendarActivity;
 import com.enesigneci.dernek.base.BaseActivity;
 import com.enesigneci.dernek.model.Event;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +27,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
@@ -32,21 +34,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.SimpleTimeZone;
 
 /**
- * Created by rdcmac on 27.03.2018.
+ * Created by rdcmac on 19.04.2018.
  */
 
-public class EventCalendarActivity extends BaseActivity {
+public class AddEventToCalendarActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_calendar);
-        setTitle("Etkinlik Takvimi");
+        setContentView(R.layout.activity_add_event_to_calendar);
+        setTitle("Etkinlik Ekle");
         final SimpleDateFormat formatter=new SimpleDateFormat("dd/MM/YYYY");
         final CaldroidFragment caldroidFragment = new CaldroidFragment();
         Bundle args = new Bundle();
@@ -61,7 +61,7 @@ public class EventCalendarActivity extends BaseActivity {
                 if (task.isSuccessful()){
                     for (Event event:task.getResult().toObjects(Event.class)){
                         eventList.add(event);
-                        caldroidFragment.setBackgroundDrawableForDate(getResources().getDrawable(R.drawable.ic_notification),event.getWhen());
+                        caldroidFragment.setTextColorForDate(Color.RED,event.getWhen());
                     }
                     caldroidFragment.refreshView();
                 }
@@ -70,10 +70,10 @@ public class EventCalendarActivity extends BaseActivity {
         CaldroidListener listener = new CaldroidListener() {
 
             @Override
-            public void onSelectDate(Date date, View view) {
+            public void onSelectDate(final Date date, View view) {
                 for (Event event: eventList){
                     if (event.getWhen().equals(date)){
-                        MaterialDialog dialog=new MaterialDialog.Builder(EventCalendarActivity.this).customView(R.layout.show_event_dialog,true).build();
+                        MaterialDialog dialog=new MaterialDialog.Builder(AddEventToCalendarActivity.this).customView(R.layout.show_event_dialog,true).build();
                         TextView type=dialog.getCustomView().findViewById(R.id.type);
                         TextView who=dialog.getCustomView().findViewById(R.id.who);
                         TextView where=dialog.getCustomView().findViewById(R.id.where);
@@ -89,6 +89,37 @@ public class EventCalendarActivity extends BaseActivity {
                         dialog.getCustomView().setBottom(0);
                         dialog.getCustomView().setLeft(0);
                         dialog.getCustomView().setRight(0);
+                        dialog.show();
+                    }else{
+                        final FirebaseFirestore db= FirebaseFirestore.getInstance();
+                        MaterialDialog dialog=new MaterialDialog.Builder(getActivity()).title("Etkinlik Detayları")
+                                .customView(R.layout.add_event_dialog,true).onPositive(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        EditText whoET=dialog.getCustomView().findViewById(R.id.who);
+                                        EditText whereET=dialog.getCustomView().findViewById(R.id.where);
+                                        RadioGroup typeRG=dialog.getCustomView().findViewById(R.id.type);
+                                        String who=whoET.getText().toString();
+                                        String where=whereET.getText().toString();
+                                        int type = typeRG.indexOfChild(findViewById(typeRG.getCheckedRadioButtonId()));
+                                        if (!who.isEmpty() && !where.isEmpty()){
+                                            db.collection("event").add(new Event(type,who,where,date)).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                    if (task.isSuccessful()){
+                                                        Toast.makeText(AddEventToCalendarActivity.this, "Etkinlik eklendi", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.d("Error",e.getMessage());
+                                                }
+                                            });
+                                        }
+                                    }
+                                }).build();
+                        dialog.setActionButton(DialogAction.POSITIVE,"Etkinlik Takvimine Ekle");
                         dialog.show();
                     }
                 }
@@ -128,5 +159,17 @@ public class EventCalendarActivity extends BaseActivity {
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
         t.replace(R.id.event_calendar, caldroidFragment);
         t.commit();
+    }
+    public static float convertPixelsToDp(float px, Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        float dp = px / ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        return dp;
+    }
+    public static float convertDpToPixel(float dp, Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        float px = dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        return px;
     }
 }
